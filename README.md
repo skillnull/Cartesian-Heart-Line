@@ -1,4 +1,6 @@
-# cartesian-heart-line
+## 笛卡尔心形线
+
+![笛卡尔心形线](public/img/cartesian-heart-line.png)
 
 ## Project setup
 ```
