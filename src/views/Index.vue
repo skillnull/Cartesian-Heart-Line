@@ -18,20 +18,27 @@ export default {
             radius: 4
         }
     },
-    comments: {},
+    components: {},
     computed: {},
-    watch: {},
+    watch: {
+        index: {
+            deep: true,
+            handler (v, ov) {
+                if (v === this.number) {
+                    this.lisner()
+                }
+            }
+        }
+    },
     methods: {
         lisner () {
             // 判断点是否画完
-            if (this.index >= this.number) {
+            if (this.index === this.number) {
                 // 当所有的点画完即进行初始化
                 this.index = 0
-                let box = document.getElementById("cartesian_heart_box")
+                let canvas = document.getElementById("cartesian_hear")
                 // 清空画布
-                box.empty()
-                // 重新建立画布
-                box.append('<canvas id="cartesian_hear"></canvas>')
+                canvas.width = canvas.width
                 // 开始进行内容绘制
                 this.startAnimation()
             }
@@ -51,13 +58,12 @@ export default {
             this.radian = this.startRadian // 弧度设为初始弧度
             this.radianDecrement = Math.PI / this.number * 2
             this.ctx.moveTo(this.getX(this.radian), this.getY(this.radian)) // 移动到初始点
-            this.index = 0
             this.interval = setInterval(() => {
                 this.radian += this.radianDecrement
                 this.ctx.lineTo(this.getX(this.radian), this.getY(this.radian)) // 在旧点和新点之间连线
                 this.index++
                 this.ctx.stroke() // 画线
-                if (this.index >= this.number) {
+                if (this.index === this.number) {
                     clearInterval(this.interval)
                 }
             }, this.time)
@@ -79,8 +85,7 @@ export default {
     },
     mounted () {
         this.startAnimation()
-        // 监听事件，监听是否画所有的点
-        window.setInterval(this.lisner(), 1)
+        this.lisner()
     },
     beforeUpdate () {
     },
