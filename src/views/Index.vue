@@ -25,13 +25,13 @@ export default {
             deep: true,
             handler (v, ov) {
                 if (v === this.number) {
-                    this.lisner()
+                    this.listern()
                 }
             }
         }
     },
     methods: {
-        lisner () {
+        listern () {
             // 判断点是否画完
             if (this.index === this.number) {
                 // 当所有的点画完即进行初始化
@@ -85,7 +85,7 @@ export default {
     },
     mounted () {
         this.startAnimation()
-        this.lisner()
+        this.listern()
     },
     beforeUpdate () {
     },
